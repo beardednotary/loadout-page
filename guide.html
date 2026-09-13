@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1e1f21">
+<link rel="canonical" href="https://loadout.page/guide">
+<link rel="icon" href="/assets/loadout-icon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/icon-32.png" sizes="32x32" type="image/png">
+<meta property="og:title" content="Getting around LoadOut">
+<meta property="og:description" content="A friendly, sit-beside-you tour of LoadOut, the project workspace new tab for Chrome.">
+<meta property="og:image" content="https://loadout.page/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>Getting Around LoadOut</title>
+<meta name="description" content="A friendly, sit-beside-you tour of LoadOut, the project workspace new tab for Chrome.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap">
+<style>
+  /* Tokens mirror the extension itself: charcoal, graphite, electric cyan, white. */
+  :root {
+    --bg: #eceef0;
+    --panel: #ffffff;
+    --panel-2: #e1e4e7;
+    --line: #d2d6da;
+    --band: #e3e6e9;
+    --fg: #1e1f21;
+    --muted: #52585e;
+    --faint: #7f858b;
+    --accent: #38c6f4;
+    --accent-ink: #0f6d8c;
+    --on-accent: #121315;
+    --display: "Montserrat", "Segoe UI", system-ui, sans-serif;
+    --body: "Inter", "Segoe UI", system-ui, sans-serif;
+    --stat: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1e1f21;
+      --panel: #25272a;
+      --panel-2: #2f3135;
+      --line: #393c41;
+      --band: #232528;
+      --fg: #f4f6f7;
+      --muted: #a7acb2;
+      --faint: #767b81;
+      --accent-ink: #4fcdf6;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1e1f21;
+    --panel: #25272a;
+    --panel-2: #2f3135;
+    --line: #393c41;
+    --band: #232528;
+    --fg: #f4f6f7;
+    --muted: #a7acb2;
+    --faint: #767b81;
+    --accent-ink: #4fcdf6;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: 1.5rem; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 400 1rem/1.7 var(--body);
+    -webkit-font-smoothing: antialiased;
+  }
+  /* The extension's diagonal backdrop band. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: var(--band);
+    clip-path: polygon(64% 0, 100% 0, 100% 100%, 30% 100%);
+    pointer-events: none;
+  }
+
+  .label, .eyebrow {
+    font: 600 11px/1.4 var(--display);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* ── Masthead ─────────────────────────────── */
+  .tag {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--on-accent);
+    font: 600 11px/1 var(--display);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.95rem 2.6rem 0.95rem 1.5rem;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 18px) 100%, 0 100%);
+  }
+  .masthead-inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 3rem 2rem 3.5rem;
+  }
+  .eyebrow { color: var(--accent-ink); margin: 0 0 0.9rem; }
+  h1 {
+    font: 800 clamp(2.3rem, 5.2vw, 3.9rem)/0.95 var(--display);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin: 0;
+    max-width: 15ch;
+    text-wrap: balance;
+  }
+  .lede {
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: var(--muted);
+    max-width: 40rem;
+    margin: 1.4rem 0 0;
+  }
+
+  /* ── Shell ────────────────────────────────── */
+  .shell {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+    display: grid;
+    grid-template-columns: 13.5rem minmax(0, 1fr);
+    gap: 4rem;
+    align-items: start;
+  }
+  .toc { position: sticky; top: 1.5rem; font-size: 0.9rem; }
+  .toc .label { color: var(--faint); margin: 0 0 0.8rem; }
+  .toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.05rem; }
+  .toc li { margin: 0; }
+  .toc a {
+    display: flex;
+    align-items: baseline;
+    gap: 0.65rem;
+    padding: 0.32rem 0;
+    color: var(--muted);
+    text-decoration: none;
+    line-height: 1.35;
+  }
+  .toc a::before {
+    content: "";
+    flex: none;
+    width: 6px;
+    height: 6px;
+    background: var(--line);
+    transform: translateY(-1px);
+  }
+  .toc a:hover { color: var(--fg); }
+  .toc a[aria-current="true"] { color: var(--fg); font-weight: 600; }
+  .toc a[aria-current="true"]::before { background: var(--accent); }
+
+  main { min-width: 0; }
+  section { padding-bottom: 3.5rem; margin-bottom: 3.5rem; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: 0; margin-bottom: 0; }
+  section > .eyebrow { margin: 0; }
+  h2 {
+    font: 800 1.75rem/1.05 var(--display);
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+    margin: 0.4rem 0 1.2rem;
+    text-wrap: balance;
+  }
+  h3 { font: 600 1.08rem/1.35 var(--body); margin: 2.2rem 0 0.5rem; text-wrap: balance; }
+  p, ul, .steps, .aside, .try, figure { max-width: 41rem; }
+  p { margin: 0 0 1rem; }
+  a { color: var(--accent-ink); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  strong { font-weight: 600; }
+  ul { padding-left: 1.15rem; margin: 0 0 1rem; }
+  li { margin: 0.35rem 0; }
+  li::marker { color: var(--accent-ink); }
+  code { font: 0.88em var(--mono); background: var(--panel-2); padding: 0.1em 0.35em; border-radius: 3px; }
+
+  kbd {
+    font: 600 0.98em/1 var(--stat);
+    letter-spacing: 0.03em;
+    padding: 0.2em 0.45em 0.12em;
+    border: 1px solid var(--line);
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    background: var(--panel);
+    color: var(--fg);
+    white-space: nowrap;
+  }
+  /* Button and label names, set the way the extension sets them. */
+  .ui {
+    font: 600 0.7em/1 var(--display);
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    background: var(--panel-2);
+    color: var(--fg);
+    padding: 0.34em 0.62em 0.3em;
+    white-space: nowrap;
+    vertical-align: 0.1em;
+    clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 0 100%);
+  }
+
+  /* Numbered steps: only used where order matters. */
+  .steps { list-style: none; counter-reset: step; padding: 0; margin: 1.5rem 0; display: grid; gap: 1rem; }
+  .steps li { counter-increment: step; display: grid; grid-template-columns: 2.2rem 1fr; gap: 0.9rem; margin: 0; }
+  .steps li::before {
+    content: counter(step);
+    font: 700 1.85rem/1 var(--stat);
+    color: var(--accent-ink);
+    text-align: right;
+    padding-top: 0.1rem;
+  }
+
+  .try { border: 1.5px solid var(--accent); border-radius: 6px; background: var(--panel); overflow: hidden; margin: 1.6rem 0; }
+  .try > .label { display: block; background: var(--accent); color: var(--on-accent); padding: 0.45rem 0.95rem; }
+  .try-body { padding: 0.95rem 1.05rem; }
+  .aside { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 0.95rem 1.1rem; margin: 1.6rem 0; }
+  .aside > .label { display: block; color: var(--faint); margin-bottom: 0.35rem; }
+  .try-body > :last-child, .aside > :last-child { margin-bottom: 0; }
+
+  /* Hierarchy chain */
+  .chain { list-style: none; padding: 0; margin: 1.6rem 0 1.4rem; display: flex; flex-wrap: wrap; gap: 1.1rem; }
+  .chain li {
+    position: relative;
+    margin: 0;
+    display: grid;
+    gap: 0.15rem;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0.55rem 0.85rem 0.6rem;
+  }
+  .chain li + li::before {
+    content: "›";
+    position: absolute;
+    left: -0.62rem;
+    top: 50%;
+    transform: translate(-50%, -54%);
+    color: var(--faint);
+    font-weight: 600;
+  }
+  .chain .label { color: var(--faint); font-size: 10px; }
+  .chain b { font: 700 0.8rem/1.2 var(--display); text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* Mock UI figures */
+  figure { margin: 1.8rem 0; }
+  figcaption { font-size: 0.82rem; color: var(--faint); margin-top: 0.55rem; }
+  .box { border: 1.5px solid var(--accent); border-radius: 6px; background: var(--panel); overflow: hidden; }
+  .box-strip {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    background: var(--accent);
+    color: var(--on-accent);
+    padding: 0.45rem 0.85rem;
+    font: 600 10.5px/1.2 var(--display);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .box-strip .stat-inline { font: 700 0.95rem/1 var(--stat); letter-spacing: 0.04em; }
+  .cells { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); }
+  .cell { padding: 0.75rem 1.1rem 0.8rem; border-right: 1px solid var(--line); }
+  .cell:last-child { border-right: 0; }
+  .stat { display: flex; align-items: baseline; gap: 0.25rem; font-family: var(--stat); font-weight: 700; line-height: 1; }
+  .stat b { font-size: 2.2rem; font-variant-numeric: tabular-nums; }
+  .stat i { font-style: normal; font-size: 1rem; text-transform: uppercase; color: var(--accent-ink); }
+  .cell small { display: block; margin-top: 0.35rem; font: 400 11px/1.3 var(--mono); color: var(--muted); }
+  .clock-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.8rem 1.1rem; border-bottom: 1px solid var(--line); }
+  .clock-row b { font: 700 2.4rem/1 var(--stat); font-variant-numeric: tabular-nums; }
+  .clock-row small { display: block; margin-top: 0.3rem; font: 400 11px/1.3 var(--mono); color: var(--muted); }
+  .fake-btn {
+    font: 600 11px/1 var(--display);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: var(--on-accent);
+    padding: 0.7rem 1.1rem;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+  }
+
+  /* Tables */
+  .table-wrap { overflow-x: auto; margin: 1.2rem 0 2rem; max-width: 45rem; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); }
+  table { border-collapse: collapse; width: 100%; font-size: 0.93rem; }
+  th {
+    font: 600 10.5px/1.3 var(--display);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--faint);
+    text-align: left;
+    padding: 0.75rem 0.95rem;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  td { padding: 0.65rem 0.95rem; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.5; }
+  tr:last-child td { border-bottom: 0; }
+  td.where { color: var(--muted); white-space: nowrap; }
+  td.keys { white-space: nowrap; }
+
+  footer { max-width: 72rem; margin: 0 auto; padding: 0 2rem 3rem; color: var(--faint); font-size: 0.85rem; }
+
+  @media (max-width: 900px) {
+    .shell { grid-template-columns: 1fr; gap: 2rem; }
+    .toc { position: static; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 1rem 1.1rem; }
+    .toc ol { grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); }
+  }
+  @media (max-width: 560px) {
+    .masthead-inner, .shell, footer { padding-left: 1.2rem; padding-right: 1.2rem; }
+    .cell { border-right: 0; border-bottom: 1px solid var(--line); }
+    .cell:last-child { border-bottom: 0; }
+  }
+</style>
+<style>a.tag { text-decoration: none; }</style>
+</head>
+<body>
+<header class="masthead">
+  <a class="tag" href="/">LoadOut · User guide</a>
+  <div class="masthead-inner">
+    <p class="eyebrow">LoadOut · v0.1 · by DahVio Studios</p>
+    <h1>Getting around LoadOut</h1>
+    <p class="lede">Pull up a chair. This is the tour I'd give you if I were sitting right next to you: what's on the screen, what to click first, and the handful of shortcuts that make it feel fast. Read it through once, then keep the cheat sheet at the bottom for later.</p>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="toc" aria-label="Contents">
+    <p class="label">On this page</p>
+    <ol>
+      <li><a href="#big-idea">The big idea</a></li>
+      <li><a href="#first-five">Your first five minutes</a></li>
+      <li><a href="#today">The Today screen</a></li>
+      <li><a href="#project">Inside a project</a></li>
+      <li><a href="#adding">Adding links without typing</a></li>
+      <li><a href="#workspace">Opening your workspace</a></li>
+      <li><a href="#back">Getting back</a></li>
+      <li><a href="#capture">Catching ideas</a></li>
+      <li><a href="#time">Tracking time</a></li>
+      <li><a href="#settings">Settings and your data</a></li>
+      <li><a href="#cheat-sheet">Cheat sheet</a></li>
+      <li><a href="#not-yet">What it doesn't do (yet)</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <section id="big-idea">
+      <p class="eyebrow">Before we start</p>
+      <h2>The big idea</h2>
+      <p>LoadOut replaces Chrome's new tab page. Instead of a search box and a grid of sites you happened to visit last week, you get your <strong>projects</strong>, the things you're actually working on, and everything each one needs.</p>
+      <p>It's arranged in four layers, and once you see them the whole thing clicks:</p>
+      <ol class="chain" aria-label="How things are organized, from biggest to smallest">
+        <li><span class="label">Space</span><b>Studio</b></li>
+        <li><span class="label">Project</span><b>Northwind Coffee</b></li>
+        <li><span class="label">Mode</span><b>Build</b></li>
+        <li><span class="label">Links &amp; snippets</span><b>GitHub · Vercel · Staging</b></li>
+      </ol>
+      <p>A <strong>space</strong> is a big bucket, like work or personal. Inside it are your projects. Each project has one or more <strong>modes</strong>, the different jobs you do on it (designing, building, talking to the client), and each mode has its own set of links and snippets.</p>
+      <p>The first time you open a new tab after installing, Chrome asks whether you meant to change your new tab page. Click <strong>Keep it</strong>. If you choose the other option, Chrome switches the extension off; you can turn it back on from <code>chrome://extensions</code>.</p>
+      <div class="aside">
+        <span class="label">Worth knowing</span>
+        <p>Everything lives on this computer, in this browser. There's no account, and nothing gets sent anywhere. The flip side: your only backup is one you export yourself. More on that under <a href="#settings">Settings</a>.</p>
+      </div>
+    </section>
+
+    <section id="first-five">
+      <p class="eyebrow">Start here</p>
+      <h2>Your first five minutes</h2>
+      <p>Do these in order and you'll have touched almost everything that matters.</p>
+      <ol class="steps">
+        <li><div>Open a new tab with <kbd>Ctrl</kbd> <kbd>T</kbd>. The very first time, LoadOut asks what you're working on: name a project or two, or start from a bookmark folder you already keep. From then on, every new tab opens on the Today screen.</div></li>
+        <li><div>Under <span class="ui">Active</span>, click a project's name. You're on its project page now.</div></li>
+        <li><div>Click through the row of tabs just under the name. Those are modes. Watch the links underneath change: same project, different job.</div></li>
+        <li><div>Hover over a section, click its <strong>+</strong>, and choose <span class="ui">From open tabs…</span>. Tick a couple of tabs you have open right now and add them.</div></li>
+        <li><div>In the <span class="ui">Open workspace</span> box, click <span class="ui">Save current tabs</span>. Untick anything unrelated, give it a name, and save. Next time, one click opens the lot.</div></li>
+        <li><div>Switch to any other tab and press <kbd>Alt</kbd> <kbd>Shift</kbd> <kbd>H</kbd>. You're back.</div></li>
+      </ol>
+      <p>Honestly, that's most of it. Everything below is detail for when you want it.</p>
+    </section>
+
+    <section id="today">
+      <p class="eyebrow">On every new tab</p>
+      <h2>The Today screen</h2>
+
+      <h3>The clock and the search box</h3>
+      <p>Big clock, today's date. Nothing to do there. The search box is the quick way around, with one quirk: when a new tab opens, Chrome always puts your cursor in the address bar, and extensions aren't allowed to change that. So to jump into search, press <kbd>/</kbd> or <kbd>Ctrl</kbd> <kbd>K</kbd> instead of reaching for the mouse.</p>
+      <p>Search looks through the projects, links, snippets and saved sessions in all your spaces, plus the tabs you already have open; picking an open tab switches to it instead of opening a copy. Use the arrow keys and <kbd>Enter</kbd> to pick something; <kbd>Ctrl</kbd> <kbd>Enter</kbd> opens a link in a new tab. Picking a snippet copies it. If nothing matches, <kbd>Enter</kbd> searches the web, and if you type something that looks like an address, such as <code>vercel.com</code>, it goes straight there. Under the results you'll also find <span class="ui">Search Google Drive</span> and <span class="ui">Search Gmail</span> for whatever you typed; you can switch those off in Settings.</p>
+
+      <h3>Active</h3>
+      <p>These are the three projects you opened most recently in this space, each shown with its <strong>next action</strong>: the first unfinished item on that project's list. Tick the box when it's done and the next one moves up. Click the text itself to fix a typo. The number on the right is how many actions are still open, and if the project tracks time you'll also see this week's hours.</p>
+
+      <h3>This week</h3>
+      <p>This only appears once you're tracking time on at least one project. You get one bar per project, across all your spaces, biggest first. It's a quick, honest look at where your week actually went.</p>
+
+      <h3>Quick capture and the inbox</h3>
+      <p>Type anything into <span class="ui">Quick capture</span> and press <kbd>Enter</kbd>. It drops into the inbox just below, so you can get a thought out of your head without deciding where it belongs yet. Pages you save without picking a project land there too (see <a href="#capture">Catching ideas</a>). When you're ready, click <span class="ui">File</span> on an item to send it to a project, or <strong>×</strong> to let it go.</p>
+
+      <h3>Projects</h3>
+      <p>Every project in this space, most recently used first. <span class="ui">New project</span> asks for a name and takes you straight to the new page. Archived projects wait underneath, behind <span class="ui">Show archived</span>.</p>
+
+      <h3>Spaces and the theme</h3>
+      <p>The colored tag in the top-left corner is the space you're in. Click it to switch. Each space has its own color, and it tints everything, so you always know where you are at a glance. Over on the right you'll find the theme switch (match your computer, light, or dark) and the gear icon for Settings.</p>
+    </section>
+
+    <section id="project">
+      <p class="eyebrow">On a project page</p>
+      <h2>Inside a project</h2>
+
+      <h3>The name and the ⋯ menu</h3>
+      <p>Click the project's name to rename it. The <strong>⋯</strong> menu on the right holds <span class="ui">Add time tracking</span>, <span class="ui">Archive</span> and <span class="ui">Delete project</span>. Archiving hides a project from Today and from search without deleting anything. To bring one back, open it from <span class="ui">Show archived</span> on the Today screen and choose <span class="ui">Unarchive</span>.</p>
+
+      <h3>Modes</h3>
+      <p>The row of tabs under the name are modes. Click one to switch, double-click to rename it, and use <strong>+</strong> to add another. Each mode keeps its own sections and links, so your Build mode can hold your code and hosting dashboards while Client mode holds email, invoices and the call link. If a project only ever needs one mode, that's completely fine. Leave it at one.</p>
+
+      <h3>Sections, links and snippets</h3>
+      <p>Inside a mode, links sit in sections: <em>Launch</em>, <em>Working links</em>, whatever suits you. Click a section's title to rename it. Hover a section to reveal its tools: <strong>+</strong> to add things, a button to switch between tiles and a compact list, and a bin to delete the section. Deleted something by mistake? Every delete shows <span class="ui">Undo</span> for a few seconds, and <kbd>Ctrl</kbd> <kbd>Z</kbd> does the same.</p>
+      <p>Clicking a link tile opens it in the same tab; <kbd>Ctrl</kbd>-click opens a new one, like any link. Site icons stay grey until you hover, which keeps the page calm. The little pencil on a tile lets you edit it, including an optional <span class="ui">Why is this here?</span> note that shows in list view and when you hover.</p>
+      <p>A <strong>snippet</strong> is a bit of text you paste a lot: a deploy command, your invoice terms, a stock reply to a support email. Click it and it's on your clipboard.</p>
+
+      <h3>Notes</h3>
+      <p>One plain scratchpad per project, down at the bottom. It saves as you type. No formatting and no folders, on purpose.</p>
+
+      <h3>Next actions</h3>
+      <p>Your list of next steps sits beside the notes. There's a hard limit of <strong>10 unfinished actions</strong> per project; when you hit it, finish or delete one before adding another. That limit is deliberate. A list that can grow forever quietly turns into a place where tasks go to die. Finished items tuck away under <span class="ui">Show done</span>, and <span class="ui">Clear</span> removes them.</p>
+    </section>
+
+    <section id="adding">
+      <p class="eyebrow">On a project page</p>
+      <h2>Adding links without typing</h2>
+      <p>You can always type an address in by hand, but you'll rarely need to.</p>
+
+      <h3>Drag them in</h3>
+      <p>Drag a bookmark off Chrome's bookmarks bar and drop it on a section. The section outlines itself and says <span class="ui">Drop to add</span>. The same works for the small icon at the left end of the address bar, or a link dragged from another window. To move a tile to a different section, just drag it there.</p>
+
+      <h3>Paste them</h3>
+      <p>Copy a web address, point your mouse at a section, and press <kbd>Ctrl</kbd> <kbd>V</kbd>. Paste a chunk of text with several addresses in it and you'll get all of them. If you're not pointing at any section, they go into the first one.</p>
+
+      <h3>Pick from open tabs or bookmarks</h3>
+      <p>Hover a section, click <strong>+</strong>, and choose <span class="ui">From open tabs…</span> or <span class="ui">From bookmarks…</span>. Tick what you want and click <span class="ui">Add</span>. Anything already in that section is greyed out, so you won't end up with duplicates.</p>
+      <p>The first time you open the bookmarks side, Chrome asks for permission to read your bookmarks. It only asks once, and your bookmarks are only ever read right there in your browser.</p>
+
+      <div class="try">
+        <span class="label">Try it</span>
+        <div class="try-body">
+          <p>If you already keep a bookmarks folder per client or project, open the bookmarks picker, click into that folder, and choose <span class="ui">Add folder as section</span>. Every link inside it, subfolders included, becomes a new section named after the folder. <span class="ui">Section from bookmarks</span>, below the sections on a project page, does the same thing.</p>
+        </div>
+      </div>
+
+      <div class="aside">
+        <span class="label">Worth knowing</span>
+        <p>When a link arrives without a name, LoadOut borrows one from a matching open tab or bookmark. If it can't find one, it uses the site's address; click the pencil to give it a proper name.</p>
+      </div>
+    </section>
+
+    <section id="workspace">
+      <p class="eyebrow">On a project page</p>
+      <h2>Opening your workspace</h2>
+      <p>A <strong>session</strong> is a saved set of tabs: the five or six things you always have open when you work on this project. Sessions live in the <span class="ui">Open workspace</span> box near the top.</p>
+
+      <figure>
+        <div class="box" aria-hidden="true">
+          <div class="box-strip"><span>Open workspace</span><span>Save current tabs</span></div>
+          <div class="cells">
+            <div class="cell"><span class="stat"><b>5</b><i>tabs</i></span><small>Morning check-in</small></div>
+            <div class="cell"><span class="stat"><b>3</b><i>tabs</i></span><small>Deep work</small></div>
+          </div>
+        </div>
+        <figcaption>Example: a project with two saved sessions. Click a number to open that session.</figcaption>
+      </figure>
+
+      <h3>Save one</h3>
+      <p>Open the tabs you'd normally want, then click <span class="ui">Save current tabs</span>. You'll see every tab in the window with a tick box, so untick the strays, give the session a name, and save. If the project has more than one mode, you can choose to show that session only in the mode you're in.</p>
+
+      <h3>Open one</h3>
+      <p>Click the session's number. Its tabs open alongside you, grouped under the project's name in the space's color. Only the first tab loads straight away; the others wait until you click them, so even a big session opens instantly without eating memory. If a project has no saved sessions yet, the box offers to open every link in the current mode instead. Hover a session and use <strong>⋯</strong> to replace its tabs with whatever you have open now, rename it, or delete it.</p>
+
+      <h3>The home tab</h3>
+      <p>When the tabs open, the LoadOut tab you clicked from joins the group as its first tab. Think of it as your way back. Close work tabs as you finish with them and you'll land on the project page, and because the group never empties, Chrome won't ask whether you want to delete it. Open the same project again later and the new tabs join the existing group rather than starting a second one.</p>
+
+      <div class="aside">
+        <span class="label">Worth knowing</span>
+        <p>Groups you opened before home tabs existed don't have one, so Chrome may still ask about deleting them when their last tab closes. Opening that workspace again from its project page adds a home tab. Prefer a separate window, or no grouping at all? There are switches for both in Settings.</p>
+      </div>
+    </section>
+
+    <section id="back">
+      <p class="eyebrow">Anywhere in Chrome</p>
+      <h2>Getting back</h2>
+      <p>Wherever you've wandered off to, there are three ways home.</p>
+
+      <h3>The shortcut</h3>
+      <p>Press <kbd>Alt</kbd> <kbd>Shift</kbd> <kbd>H</kbd> (<kbd>⌥</kbd> <kbd>⇧</kbd> <kbd>H</kbd> on a Mac). If the tab you're on belongs to a project's group, you jump to that group's home tab. Otherwise you go to whichever LoadOut tab you have open, or a fresh one opens.</p>
+
+      <h3>The popup</h3>
+      <p>Click the extension's icon in Chrome's toolbar, or press <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>K</kbd>. <span class="ui">LoadOut home</span> at the top does the same as the shortcut. Below it, type part of a project's name and press <kbd>Enter</kbd> to jump straight there. If that project is already open in a tab, you're taken to it instead of getting a duplicate. Type part of a page's title and matching open tabs show up too.</p>
+
+      <h3>The address bar</h3>
+      <p>Click the address bar, type <code>lo</code> and a space, then start typing a project's name. Suggestions appear as you type; pick one and press <kbd>Enter</kbd>. <code>lo</code> followed by <kbd>Enter</kbd> on its own takes you to Today.</p>
+
+      <div class="aside">
+        <span class="label">Worth knowing</span>
+        <p>If <kbd>Alt</kbd> <kbd>Shift</kbd> <kbd>H</kbd> does nothing, another extension probably claimed it first. Visit <code>chrome://extensions/shortcuts</code> and pick a different combination; the popup always shows whichever one is set.</p>
+      </div>
+    </section>
+
+    <section id="capture">
+      <p class="eyebrow">Anywhere in Chrome</p>
+      <h2>Catching ideas</h2>
+      <p>You're reading something useful for a project, but you're not working on that project right now. Save it where it belongs in two clicks and get back to what you were doing.</p>
+
+      <h3>Right-click, save to project</h3>
+      <p>Right-click anywhere on a page, on a link, or on text you've highlighted, and choose <span class="ui">Save to project</span>. Pick the project, then pick why you're saving it: <em>Research</em>, <em>Competitor</em>, <em>Content idea</em> and so on. That little label answers "why on earth did I save this?" three weeks from now. The toolbar icon flashes a tick when it's done.</p>
+      <p>Right-click a link and you save that link, not the page you're on. Highlight a sentence first and the quote is saved along with the page. Not sure where something goes? Choose <span class="ui">Inbox (decide later)</span> at the bottom of the menu.</p>
+
+      <h3>The Saved list</h3>
+      <p>Everything filed to a project shows up on its project page in a <span class="ui">Saved</span> box, grouped by reason. Use the <strong>⋯</strong> next to an item to turn it into a proper link in one of the current mode's sections, move it to a different project, send it back to the inbox, or delete it.</p>
+
+      <h3>Other quick ways in</h3>
+      <ul>
+        <li><strong>The page you're on:</strong> press <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>S</kbd> and it goes straight to the Saved list of the project you had open most recently.</li>
+        <li><strong>From the popup:</strong> <span class="ui">Save this tab to inbox</span>.</li>
+        <li><strong>A thought rather than a page:</strong> type it into <span class="ui">Quick capture</span> on the Today screen.</li>
+      </ul>
+      <div class="try">
+        <span class="label">Try it</span>
+        <div class="try-body">
+          <p>Empty your inbox once a day. Click <span class="ui">File</span> on each item, pick a project and a reason, and it leaves the Today screen and waits on the right project page.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="time">
+      <p class="eyebrow">On a project page · optional</p>
+      <h2>Tracking time</h2>
+      <p>Time tracking is off by default, and it only appears on the projects you choose. Turn it on from the project's <strong>⋯</strong> menu with <span class="ui">Add time tracking</span>, or with <span class="ui">Add timer</span> below the sections. Remove it the same way whenever you like; your logged hours are kept.</p>
+
+      <figure>
+        <div class="box" aria-hidden="true">
+          <div class="box-strip"><span>Time</span><span class="stat-inline">RUNNING</span></div>
+          <div class="clock-row">
+            <div><b>0:42:18</b><small>Started 9:14 AM</small></div>
+            <span class="fake-btn">■ Stop</span>
+          </div>
+          <div class="cells">
+            <div class="cell"><span class="stat"><b>2.5</b><i>hrs</i></span><small>Today</small></div>
+            <div class="cell"><span class="stat"><b>11.2</b><i>hrs</i></span><small>This week</small></div>
+            <div class="cell"><span class="stat"><b>64</b><i>hrs</i></span><small>All time</small></div>
+          </div>
+        </div>
+        <figcaption>Example: the Time panel with a timer running.</figcaption>
+      </figure>
+
+      <h3>Start and stop</h3>
+      <p>Click <span class="ui">Start</span>. The clock runs in the Time panel, in a small bar at the top of every LoadOut page, in the popup, and as a number on the toolbar icon (<code>42m</code>, then <code>1:25</code> once you pass the hour). Click <span class="ui">Stop</span> and the time is logged. Anything under a minute is thrown away, since it was almost certainly a misclick.</p>
+      <p>Only one timer runs at a time. Starting a timer on another project stops and logs the first, so switching projects is a single click.</p>
+
+      <h3>When you step away</h3>
+      <p>The timer is built not to flatter you.</p>
+      <ul>
+        <li>After <strong>5 minutes</strong> with no keyboard or mouse activity anywhere on your computer (not just in Chrome), it stops, and those idle minutes aren't counted. Typing in your code editor or design app counts as being here.</li>
+        <li>Locking your screen stops it straight away.</li>
+        <li>If the computer sleeps or Chrome gets closed, it stops at the point it lost track of you.</li>
+      </ul>
+      <p>When that happens the panel tells you, and the button reads <span class="ui">Resume</span>.</p>
+
+      <h3>Forgot to start it?</h3>
+      <p>Click <span class="ui">Log time</span>, type how long, pick the day, and log it. It understands durations the way people actually write them; the <a href="#cheat-sheet">cheat sheet</a> lists the formats. <span class="ui">Entries</span> lists everything logged for the project, newest first. Hover one and click <strong>×</strong> to remove it.</p>
+
+      <h3>Totals and exporting</h3>
+      <p>The panel shows <strong>Today</strong>, <strong>This week</strong> (weeks start on Monday) and <strong>All time</strong>, and the Today screen compares projects side by side. If you bill clients, go to Settings and choose <span class="ui">Export hours CSV</span>: one row per entry with the space, project, date, start and end times, minutes, hours, and whether it was timed or entered by hand, ready for a spreadsheet or an invoice.</p>
+    </section>
+
+    <section id="settings">
+      <p class="eyebrow">Settings</p>
+      <h2>Settings and your data</h2>
+      <p>Click the gear icon on any new tab.</p>
+
+      <h3>New tab</h3>
+      <p>The theme, which search engine the search box falls back to, whether to show the clock and the search box at all, and whether to offer Google Drive and Gmail searches.</p>
+
+      <h3>Opening workspaces</h3>
+      <p>Choose whether sessions open in a new window instead of the current one, whether opened tabs get grouped, and whether tabs load only when you click them.</p>
+
+      <h3>Spaces</h3>
+      <p>Rename each space and pick its color. That color shows up everywhere (the corner tag, buttons, tab groups), so choose something you'll recognize at a glance.</p>
+
+      <h3>Data</h3>
+      <p>Everything is stored in this browser on this computer. That keeps it private and fast, and it means you should <strong>export regularly</strong>. If your last backup is more than a week old, the Today screen reminds you, and <span class="ui">Back up now</span> saves the file in one click.</p>
+      <ul>
+        <li><span class="ui">Export JSON</span> saves a complete backup file.</li>
+        <li><span class="ui">Import JSON…</span> replaces everything with a backup file. This is also how you move to another computer.</li>
+        <li><span class="ui">Restore previous save</span> undoes the most recent change to your data, for when something went wrong a moment ago.</li>
+        <li><span class="ui">Export hours CSV</span> appears once you've logged some time.</li>
+      </ul>
+
+      <h3>Support</h3>
+      <p>If LoadOut has earned its spot, <span class="ui">Leave a review</span> takes you to its store page. After you've been using it for a week or so, the Today screen may also ask, once, and at most twice. <span class="ui">Not now</span> really means not now.</p>
+
+      <h3>Danger zone</h3>
+      <p><span class="ui">Start fresh</span> wipes everything and brings back the welcome screen. <span class="ui">Load demo data</span> swaps in a set of made-up projects for screenshots or recordings. It downloads a backup of your real data first, and it's best done in a separate Chrome profile.</p>
+    </section>
+
+    <section id="cheat-sheet">
+      <p class="eyebrow">Keep this handy</p>
+      <h2>Cheat sheet</h2>
+
+      <h3>Keys</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Where</th><th scope="col">Press</th><th scope="col">What happens</th></tr></thead>
+          <tbody>
+            <tr><td class="where">Any tab</td><td class="keys"><kbd>Alt</kbd> <kbd>Shift</kbd> <kbd>H</kbd></td><td>Back to LoadOut (the project's home tab when there is one)</td></tr>
+            <tr><td class="where">Any tab</td><td class="keys"><kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>S</kbd></td><td>Save the page to your inbox</td></tr>
+            <tr><td class="where">Any tab</td><td class="keys"><kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>K</kbd></td><td>Open the popup</td></tr>
+            <tr><td class="where">Any page</td><td class="keys">Right-click</td><td>Save the page, a link, or highlighted text to a project</td></tr>
+            <tr><td class="where">Address bar</td><td class="keys"><code>lo</code> <kbd>Space</kbd> name</td><td>Jump to a project</td></tr>
+            <tr><td class="where">New tab</td><td class="keys"><kbd>/</kbd> or <kbd>Ctrl</kbd> <kbd>K</kbd></td><td>Put the cursor in search</td></tr>
+            <tr><td class="where">Search</td><td class="keys"><kbd>↑</kbd> <kbd>↓</kbd> <kbd>Enter</kbd></td><td>Choose a result</td></tr>
+            <tr><td class="where">Search</td><td class="keys"><kbd>Ctrl</kbd> <kbd>Enter</kbd></td><td>Open the result in a new tab</td></tr>
+            <tr><td class="where">Project page</td><td class="keys"><kbd>Ctrl</kbd> <kbd>V</kbd></td><td>Add copied links to the section under your mouse</td></tr>
+            <tr><td class="where">After a delete</td><td class="keys"><kbd>Ctrl</kbd> <kbd>Z</kbd></td><td>Undo it</td></tr>
+            <tr><td class="where">Editing text</td><td class="keys"><kbd>Enter</kbd> / <kbd>Esc</kbd></td><td>Save / cancel</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>On a Mac, use <kbd>⌘</kbd> in place of <kbd>Ctrl</kbd>, and <kbd>⌥</kbd> for <kbd>Alt</kbd>. You can change any of the Chrome-wide shortcuts at <code>chrome://extensions/shortcuts</code>.</p>
+
+      <h3>Durations you can type into Log time</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">You type</th><th scope="col">It logs</th></tr></thead>
+          <tbody>
+            <tr><td class="keys"><code>90</code></td><td>1h 30m (a plain number means minutes)</td></tr>
+            <tr><td class="keys"><code>45m</code></td><td>45m</td></tr>
+            <tr><td class="keys"><code>1:30</code></td><td>1h 30m</td></tr>
+            <tr><td class="keys"><code>1h30</code> or <code>1h 30m</code></td><td>1h 30m</td></tr>
+            <tr><td class="keys"><code>1.5h</code></td><td>1h 30m</td></tr>
+            <tr><td class="keys"><code>2 hours</code></td><td>2h</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="not-yet">
+      <p class="eyebrow">Honest limits</p>
+      <h2>What it doesn't do (yet)</h2>
+      <p>A few things it deliberately doesn't do, and a few it just doesn't do yet:</p>
+      <ul>
+        <li><strong>No syncing between computers.</strong> Use Export and Import to move your setup.</li>
+        <li><strong>The reasons you save things under</strong> (Research, Competitor and so on) can't be edited yet.</li>
+        <li><strong>Spaces can be renamed and recolored but not added or removed</strong> from Settings yet.</li>
+        <li><strong>Tiles and projects can't be reordered by dragging yet.</strong> Moving a tile between sections works.</li>
+        <li><strong>No due dates, priorities or reminders</strong>, and that one's on purpose. It's a way into your work, not another task manager.</li>
+      </ul>
+    </section>
+  </main>
+</div>
+
+<footer>Written for LoadOut v0.1 by DahVio Studios, September 2026.</footer>
+
+<script>
+  (() => {
+    const links = [...document.querySelectorAll('.toc a')];
+    const byId = new Map(links.map((a) => [a.hash.slice(1), a]));
+    if (!('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          links.forEach((a) => a.removeAttribute('aria-current'));
+          byId.get(entry.target.id)?.setAttribute('aria-current', 'true');
+        }
+      },
+      { rootMargin: '-15% 0px -70% 0px' },
+    );
+    document.querySelectorAll('main section[id]').forEach((s) => observer.observe(s));
+  })();
+</script>
+</body>
+</html>

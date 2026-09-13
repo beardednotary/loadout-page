@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  <!-- LoadOut mark: A's slanted tag + C's squared L. 96-unit canvas on a 6-unit grid (96 ÷ 16 px), so straight edges land on whole pixels at 16/32/48. -->
+  <path d="M6 12H90L72 84H6Z" fill="#38C6F4"/>
+  <path d="M24 24H42V54H60V72H24Z" fill="#1E1F21"/>
+</svg>

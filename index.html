@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LoadOut: Project Workspaces for Chrome</title>
+  <meta name="description" content="LoadOut turns Chrome's new tab into a home base for your projects: the right links, tabs and next step for whatever you're working on, one click away.">
+  <link rel="canonical" href="https://loadout.page/">
+  <meta name="theme-color" content="#1e1f21">
+  <link rel="icon" href="/assets/loadout-icon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/icon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/icon-128.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://loadout.page/">
+  <meta property="og:site_name" content="LoadOut">
+  <meta property="og:title" content="LoadOut: Project Workspaces for Chrome">
+  <meta property="og:description" content="From a blank tab to real work in two seconds. Early access is open.">
+  <meta property="og:image" content="https://loadout.page/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="LoadOut home">
+      <svg viewBox="24 24 36 48" aria-hidden="true"><path d="M24 24H42V54H60V72H24Z" fill="currentColor" /></svg>
+      LoadOut
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="/guide">Guide</a>
+      <a class="btn btn-small" href="#join">Get early access</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <p class="label eyebrow">Chrome extension · Early access</p>
+          <h1>From a blank tab to real work in <em>two seconds.</em></h1>
+          <p class="lede">LoadOut turns Chrome's new tab into a home base for your projects: the right links, tabs and next step for whatever you're working on, one click away.</p>
+          <form class="waitlist" action="https://formspree.io/f/xdeorwvl" method="POST" data-waitlist>
+            <div class="waitlist-row">
+              <label class="sr-only" for="email-hero">Email address</label>
+              <input id="email-hero" type="email" name="email" required autocomplete="email" placeholder="you@example.com">
+              <button class="btn" type="submit">Get early access</button>
+            </div>
+            <input type="hidden" name="source" value="hero">
+            <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <p class="form-fine">Free. No account. Your projects stay in your browser.</p>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <figure class="browser" role="img" aria-label="LoadOut's Today screen: the Studio space with three active projects, each showing its next action, and a This week bar chart of tracked hours.">
+          <div class="browser-top" aria-hidden="true">
+            <i></i><i></i><i></i>
+            <span class="browser-tab"><svg viewBox="0 0 96 96"><path d="M6 12H90L72 84H6Z" fill="#38C6F4" /><path d="M24 24H42V54H60V72H24Z" fill="#1E1F21" /></svg>New Tab</span>
+          </div>
+          <div class="app" aria-hidden="true">
+            <span class="app-tag">Studio ▾</span>
+            <div class="app-body">
+              <div class="app-date">Monday, September 14</div>
+              <div class="app-clock">9:41<small>AM</small></div>
+              <div class="app-search">Search projects, links, open tabs — or the web</div>
+              <div class="app-label">Active</div>
+              <div class="app-row"><span class="mono">NC</span><span class="app-name">Northwind Coffee</span><span class="app-div"></span><span class="app-action">Send homepage v2 to Dana</span><span class="app-stat">3<span>open</span></span></div>
+              <div class="app-row"><span class="mono">T</span><span class="app-name">Tidepool</span><span class="app-div"></span><span class="app-action">Ship 2.3 with streak freezes</span><span class="app-stat">3<span>open</span></span></div>
+              <div class="app-row"><span class="mono">F</span><span class="app-name">Fieldnote</span><span class="app-div"></span><span class="app-action">Draft the Product Hunt tagline</span><span class="app-stat">2<span>open</span></span></div>
+              <div class="app-label">This week</div>
+              <div class="app-bar"><b>Northwind Coffee</b><i style="--w: 100%"></i><span>11h 45m</span></div>
+              <div class="app-bar"><b>Tidepool</b><i style="--w: 72%"></i><span>8h 30m</span></div>
+              <div class="app-bar"><b>Fieldnote</b><i style="--w: 53%"></i><span>6h 15m</span></div>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="how">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="label">How it works</p>
+          <h2>Organized around projects, not websites</h2>
+          <p>Everything in LoadOut hangs off what you're building. Once you see the four layers, the whole thing clicks.</p>
+        </div>
+        <ol class="chain" aria-label="How LoadOut is organized, from biggest to smallest">
+          <li><span class="label">Space</span><b>Studio</b></li>
+          <li><span class="label">Project</span><b>Northwind Coffee</b></li>
+          <li><span class="label">Mode</span><b>Build</b></li>
+          <li><span class="label">Links &amp; snippets</span><b>GitHub · Vercel · Staging</b></li>
+        </ol>
+        <div class="compare">
+          <div><p class="label">Bookmarks</p><p>Sort the internet by website.</p></div>
+          <div><p class="label">Tab managers</p><p>Save whatever you happened to have open.</p></div>
+          <div class="us"><p class="label">LoadOut</p><p>Starts from what you're building.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="label">What's in the kit</p>
+          <h2>Everything a project needs, one tab away</h2>
+        </div>
+
+        <div class="features">
+          <article class="feature">
+            <div class="mock" aria-hidden="true">
+              <div class="mode-tabs"><span class="on">Design</span><span>Build</span><span>Client</span></div>
+              <div class="mode-links"><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="feature-text">
+              <h3>Modes for every kind of work</h3>
+              <p>Design, build, client calls: the same project, with a different set of links and snippets for each job. Switch in one click.</p>
+            </div>
+          </article>
+
+          <article class="feature">
+            <div class="mock mock-workspace" aria-hidden="true">
+              <div class="tabstrip"><span class="group">Northwind Coffee</span><span class="tabstub">GitHub</span><span class="tabstub">Vercel</span><span class="tabstub">Shopify</span></div>
+              <div class="statbox">
+                <div class="statbox-strip"><span>Open workspace</span><span>Save current tabs</span></div>
+                <div class="statbox-cells">
+                  <div><b>4</b><i>tabs</i><small>Dev</small></div>
+                  <div><b>3</b><i>tabs</i><small>Design review</small></div>
+                </div>
+              </div>
+            </div>
+            <div class="feature-text">
+              <h3>One-click workspaces</h3>
+              <p>Save the tabs you always work with. One click opens them grouped and colored, loading each only when you click it, and closing them lands you back on the project.</p>
+            </div>
+          </article>
+
+          <article class="feature">
+            <div class="mock" aria-hidden="true">
+              <ul class="ctx ctx-1"><li>Back</li><li>Reload</li><li class="sep"></li><li class="hot">Save to project <span>›</span></li><li>Inspect</li></ul>
+              <ul class="ctx ctx-2"><li class="dim">Studio</li><li class="hot">Northwind Coffee <span>›</span></li><li>Tidepool <span>›</span></li><li>Fieldnote <span>›</span></li><li class="sep"></li><li>Inbox (decide later)</li></ul>
+              <ul class="ctx ctx-3"><li class="hot">Research</li><li>Competitor</li><li>Content idea</li><li>Reference</li></ul>
+            </div>
+            <div class="feature-text">
+              <h3>Save from anywhere</h3>
+              <p>Right-click any page, link or highlighted quote and file it to a project with a reason: research, competitor, content idea. Three weeks later, you'll know why you saved it.</p>
+            </div>
+          </article>
+
+          <article class="feature">
+            <div class="mock" aria-hidden="true">
+              <span class="drag-chip"><i></i>Linear</span>
+              <div class="dropzone"><span class="label">Drop to add</span></div>
+            </div>
+            <div class="feature-text">
+              <h3>Add links without typing</h3>
+              <p>Drag bookmarks straight in, paste a batch of addresses, pick from the tabs you have open, or turn a whole bookmark folder into a project in one go.</p>
+            </div>
+          </article>
+
+          <article class="feature">
+            <div class="mock mock-back" aria-hidden="true">
+              <div class="stack">
+                <div class="back-keys"><kbd>Alt</kbd><kbd>Shift</kbd><kbd>H</kbd></div>
+                <div class="omni"><span class="kw">lo</span><span>tide</span></div>
+                <div class="omni-sug"><b>Tidepool</b> · Studio</div>
+              </div>
+            </div>
+            <div class="feature-text">
+              <h3>Back in one keystroke</h3>
+              <p>Wherever you've wandered, one shortcut takes you home to the project you were in. Or type <strong>lo</strong> and a project name straight into the address bar.</p>
+            </div>
+          </article>
+
+          <article class="feature">
+            <div class="mock mock-time" aria-hidden="true">
+              <div class="statbox">
+                <div class="statbox-strip"><span>Time</span><span>Running</span></div>
+                <div class="clock-row"><b class="tc" style="font: 700 2.1rem/1 var(--stat)">0:42:18</b><span class="stop">■ Stop</span></div>
+                <div class="statbox-cells">
+                  <div><b>2.5</b><i>hrs</i><small>Today</small></div>
+                  <div><b>11.2</b><i>hrs</i><small>This week</small></div>
+                </div>
+              </div>
+            </div>
+            <div class="feature-text">
+              <h3>Time, if you want it</h3>
+              <p>Turn on a timer for the projects you care about and see where your week actually went. It pauses when you step away, and exports to CSV if you bill by the hour.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="privacy">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="label">Private by design</p>
+          <h2>Your projects never leave your browser</h2>
+          <p>LoadOut stores everything in Chrome on your computer. Export a backup file any time.</p>
+        </div>
+        <div class="facts">
+          <div><b>0</b><p>accounts to create</p></div>
+          <div><b>0</b><p>servers holding your data</p></div>
+          <div><b>0</b><p>analytics or trackers in the extension</p></div>
+        </div>
+        <p><a href="/privacy">Read the privacy policy</a>, including exactly which Chrome permissions LoadOut asks for and why.</p>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="label">Questions</p>
+          <h2>Before you ask</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>How is this different from a tab manager?</summary>
+            <p>Tab managers save whatever you happened to have open. LoadOut starts from the project: the links you always need, a saved set of tabs you open on purpose, and the one next thing to do. Saved tabs are one part of it, not the whole product.</p>
+          </details>
+          <details>
+            <summary>Does it replace my new tab page?</summary>
+            <p>Yes, that's where it lives. Chrome asks you to confirm the change the first time you open a new tab. You can go back any time by turning the extension off.</p>
+          </details>
+          <details>
+            <summary>Where does my data live?</summary>
+            <p>In Chrome's storage on your computer, and nowhere else. There's no account and no sync. Export a backup file from Settings, and import it to move to another computer.</p>
+          </details>
+          <details>
+            <summary>Which browsers does it work in?</summary>
+            <p>LoadOut is built and tested for Chrome on desktop. Other Chromium browsers, such as Edge and Brave, should work too.</p>
+          </details>
+          <details>
+            <summary>Is it free?</summary>
+            <p>LoadOut will have a free plan. Everyone who joins early access gets Pro free, for life, as a thank-you for helping shape it.</p>
+          </details>
+          <details>
+            <summary>When can I try it?</summary>
+            <p>Early access opens soon. Join the list and you'll get one email with the install link the day it's ready.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="join" id="join">
+      <div class="wrap">
+        <div>
+          <p class="label" style="color: var(--accent)">Early access</p>
+          <h2>Load up your projects</h2>
+          <p>Get the install link the day LoadOut opens. One email, no spam.</p>
+        </div>
+        <form class="waitlist" action="https://formspree.io/f/xdeorwvl" method="POST" data-waitlist>
+          <div class="waitlist-row">
+            <label class="sr-only" for="email-join">Email address</label>
+            <input id="email-join" type="email" name="email" required autocomplete="email" placeholder="you@example.com">
+            <button class="btn" type="submit">Join the list</button>
+          </div>
+          <input type="hidden" name="source" value="footer">
+          <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <p class="form-fine">We'll only use your email to tell you about LoadOut. <a href="/privacy">Privacy policy</a>.</p>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <span>LoadOut is made by <a href="https://dahvio.com">DahVio Studios</a> · © 2026</span>
+      <nav aria-label="Footer">
+        <a href="/guide">User guide</a>
+        <a href="/privacy">Privacy</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Progressive enhancement: without JS the form posts to Formspree normally.
+    for (const form of document.querySelectorAll('form[data-waitlist]')) {
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const button = form.querySelector('button');
+        const status = form.querySelector('.form-status');
+        button.disabled = true;
+        form.dataset.state = 'sending';
+        status.textContent = 'Adding you…';
+        try {
+          const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+          if (!res.ok) {
+            const data = await res.json().catch(() => ({}));
+            throw new Error(data.errors?.map((e) => e.message).join(' ') || "That didn't go through.");
+          }
+          form.dataset.state = 'done';
+          form.reset();
+          status.textContent = "You're on the list. We'll email you when LoadOut is ready.";
+        } catch (error) {
+          form.dataset.state = 'error';
+          status.textContent = `${error.message} Check the address and try again.`;
+        } finally {
+          button.disabled = false;
+        }
+      });
+    }
+  </script>
+</body>
+</html>
