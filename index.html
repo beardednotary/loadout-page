@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="/assets/analytics.js"></script>
   <title>LoadOut: Project Workspaces for Chrome</title>
   <meta name="description" content="LoadOut turns Chrome's new tab into a home base for your projects: the right links, tabs and next step for whatever you're working on, one click away.">
   <link rel="canonical" href="https://loadout.page/">
@@ -278,6 +279,7 @@
       <nav aria-label="Footer">
         <a href="/guide">User guide</a>
         <a href="/privacy">Privacy</a>
+        <button type="button" class="linklike" data-consent-settings>Cookie settings</button>
       </nav>
     </div>
   </footer>
@@ -299,6 +301,7 @@
             throw new Error(data.errors?.map((e) => e.message).join(' ') || "That didn't go through.");
           }
           form.dataset.state = 'done';
+          window.loadoutTrack?.('generate_lead', { form_location: form.querySelector('[name="source"]').value });
           form.reset();
           status.textContent = "You're on the list. We'll email you when LoadOut is ready.";
         } catch (error) {

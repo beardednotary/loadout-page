@@ -18,6 +18,12 @@ Plain static HTML on Vercel — no framework, no build step.
 
 Both forms post to Formspree (`https://formspree.io/f/xdeorwvl`) with a `source` field (`hero` / `footer`) and the `_gotcha` honeypot. They work without JavaScript; with it, the success message shows in place.
 
+## Analytics
+
+`assets/analytics.js` (loaded first in every page's `<head>`, including the generated guide) runs Google Analytics 4 (`G-J943N748QB`) with Consent Mode v2: analytics cookies are denied by default and only set after the visitor clicks **Allow** in the consent bar; ad consent is always denied. The choice lives in `localStorage` (`loadout-analytics-consent`); any `[data-consent-settings]` element reopens it, and choosing No thanks clears `_ga` cookies. Cookies expire after 13 months.
+
+Events: `generate_lead` with `form_location` = `hero` | `footer` on a successful waitlist signup (mark it as a key event in GA).
+
 ## Updating the guide
 
 The manual lives in the extension repo (`project-command-center/docs/user-manual.html`). After changing it there:
