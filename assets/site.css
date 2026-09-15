@@ -269,7 +269,9 @@ h2 { margin: 0.5rem 0 1rem; font: 800 clamp(1.9rem, 3.6vw, 2.8rem)/1 var(--displ
 
 /* Footer */
 .footer { padding: 2.2rem 0 2.6rem; border-top: 1px solid var(--line); color: var(--faint); font-size: 0.9rem; }
-.footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+.footer .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+.footer .badge { display: flex; flex: none; }
+.footer .badge img { max-width: none; }
 .footer nav { display: flex; gap: 1.4rem; }
 .footer a, .footer .linklike { color: var(--muted); text-decoration: none; }
 .footer a:hover, .footer .linklike:hover { color: var(--fg); }
