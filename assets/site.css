@@ -88,6 +88,12 @@ p { margin: 0 0 1rem; }
 .btn:hover { filter: brightness(1.1); }
 .btn:disabled { opacity: 0.6; cursor: progress; }
 .btn-small { height: 36px; padding: 0 1.1rem; font-size: 10.5px; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%); }
+.btn-secondary { background: var(--fg); color: var(--bg); }
+
+.cta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.1rem; margin: 0 0 1.75rem; }
+.cta-note { font-size: 0.85rem; color: var(--faint); }
+.founding { margin: 0 0 0.6rem; font-size: 0.95rem; color: var(--muted); }
+.founding strong { color: var(--fg); font-weight: 600; }
 
 .waitlist { position: relative; max-width: 31rem; }
 .waitlist-row { display: flex; gap: 0.5rem; }
@@ -114,7 +120,7 @@ p { margin: 0 0 1rem; }
   .waitlist-row { flex-direction: column; }
   /* flex: 1 would shrink the field's height once the row stacks. */
   .waitlist input[type="email"] { flex: none; width: 100%; }
-  .waitlist .btn { width: 100%; }
+  .waitlist .btn, .cta .btn { width: 100%; }
 }
 
 /* ── Hero ────────────────────────────────── */

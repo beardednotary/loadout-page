@@ -22,7 +22,9 @@ Both forms post to Formspree (`https://formspree.io/f/xdeorwvl`) with a `source`
 
 `assets/analytics.js` (loaded first in every page's `<head>`, including the generated guide) runs Google Analytics 4 (`G-J943N748QB`) with Consent Mode v2: analytics cookies are denied by default and only set after the visitor clicks **Allow** in the consent bar; ad consent is always denied. The choice lives in `localStorage` (`loadout-analytics-consent`); any `[data-consent-settings]` element reopens it, and choosing No thanks clears `_ga` cookies. Cookies expire after 13 months.
 
-Events: `generate_lead` with `form_location` = `hero` | `footer` on a successful waitlist signup (mark it as a key event in GA).
+Events: `generate_lead` with `form_location` = `hero` | `footer` on a successful early-access signup (mark it as a key event in GA), and `install_click` with `link_location` = `nav` | `hero` | `faq` | `join` when someone clicks an Add to Chrome link.
+
+The Chrome Web Store listing: https://chromewebstore.google.com/detail/loadout-project-workspace/hlkflndgfegfdgbnhiboeagmdhbgpboj — early-access signups are the founding-member list (Pro free for life), so keep the Formspree export.
 
 ## Updating the guide
 
